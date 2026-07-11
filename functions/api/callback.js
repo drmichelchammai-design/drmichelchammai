@@ -1,32 +1,28 @@
 function renderMessagePage(status, payload) {
-  const message =
-    status === "success"
-      ? `authorization:github:success:${JSON.stringify({
-          token: payload,
-          provider: "github",
-        })}`
-      : authorization:github:error:${JSON.stringify({ message: payload })};
-
-  return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Auth ${status}</title></head>
-<body>
-<script>
-(function() {
-  function receiveMessage(e) {
-    window.opener.postMessage(
-      ${JSON.stringify(message)},
-      e.origin
-    );
-    window.removeEventListener("message", receiveMessage, false);
+  var message;
+  if (status === "success") {
+    message = "authorization:github:success:" + JSON.stringify({ token: payload, provider: "github" });
+  } else {
+    message = "authorization:github:error:" + JSON.stringify({ message: payload });
   }
-  window.addEventListener("message", receiveMessage, false);
-  window.opener.postMessage("authorizing:github", "*");
-})();
-</script>
-<p>يمكنك إغلاق هذه النافذة الآن.</p>
-</body>
-</html>`;
+
+  var messageJson = JSON.stringify(message);
+
+  var html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Auth " + status + "</title></head><body>";
+  html += "<script>";
+  html += "(function() {";
+  html += "function receiveMessage(e) {";
+  html += "window.opener.postMessage(" + messageJson + ", e.origin);";
+  html += "window.removeEventListener('message', receiveMessage, false);";
+  html += "}";
+  html += "window.addEventListener('message', receiveMessage, false);";
+  html += "window.opener.postMessage('authorizing:github', '*');";
+  html += "})();";
+  html += "</script>";
+  html += "<p>You can close this window now.</p>";
+  html += "</body></html>";
+
+  return html;
 }
 
 export async function onRequestGet(context) {
@@ -40,7 +36,7 @@ export async function onRequestGet(context) {
   const savedState = match ? match[1] : null;
 
   if (!code || !state || !savedState || state !== savedState) {
-    return new Response(renderMessagePage("error", "طلب غير صالح (state mismatch)"), {
+    return new Response(renderMessagePage("error", "Invalid request (state mismatch)"), {
       headers: { "Content-Type": "text/html; charset=utf-8" },
       status: 400,
     });
@@ -56,7 +52,7 @@ export async function onRequestGet(context) {
       body: JSON.stringify({
         client_id: env.GITHUB_CLIENT_ID,
         client_secret: env.GITHUB_CLIENT_SECRET,
-        code,
+        code: code,
       }),
     });
 
@@ -64,7 +60,7 @@ export async function onRequestGet(context) {
 
     if (tokenData.error || !tokenData.access_token) {
       return new Response(
-        renderMessagePage("error", tokenData.error_description || "فشل الحصول على التوكن"),
+        renderMessagePage("error", tokenData.error_description || "Failed to get token"),
         {
           headers: { "Content-Type": "text/html; charset=utf-8" },
           status: 400,
@@ -79,7 +75,7 @@ export async function onRequestGet(context) {
       },
     });
   } catch (err) {
-    return new Response(renderMessagePage("error", "خطأ غير متوقع أثناء المصادقة"), {
+    return new Response(renderMessagePage("error", "Unexpected error during authentication"), {
       headers: { "Content-Type": "text/html; charset=utf-8" },
       status: 500,
     });
