@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: "ar"
+
+collections:
+  - name: "articles"
+    label: "المقالات"
+    label_singular: "مقال"
+    files:
+      - name: "articles"
+        label: "قائمة المقالات"
+        file: "content/articles.json"
+        fields:
+          - name: "articles"
+            label: "المقالات"
+            widget: "list"
+            label_singular: "مقال"
+            summary: "{{title}} — {{date}}"
+            fields:
+              - { name: "title", label: "العنوان", widget: "string" }
+              - { name: "slug", label: "الرابط المختصر (بالإنكليزية، بدون مسافات)", widget: "string" }
+              - { name: "date", label: "التاريخ", widget: "date", format: "YYYY-MM-DD" }
+              - name: "category"
+                label: "التصنيف"
+                widget: "select"
+                options: ["سياسة", "فكر وثقافة", "أدب وشعر", "دراسات دينية", "مقابلات"]
+              - { name: "image", label: "صورة المقال (اختياري)", widget: "image", required: false }
+              - { name: "body", label: "نص المقال", widget: "markdown" }
