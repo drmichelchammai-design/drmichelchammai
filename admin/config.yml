@@ -1,7 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: drmichelchammai-design/drmichelchammai
   branch: main
-
+  base_url: https://drmichelchammai.com
+  auth_endpoint: api/auth
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
