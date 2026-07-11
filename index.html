@@ -1,1 +1,977 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>د. ميشال الشّمّاعي | صحافة سياسية وتحليل استراتيجي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12181f;
+    --ink-2:#1a222b;
+    --paper:#f2efe6;
+    --paper-dim:#c9c4b6;
+    --cedar:#3b5c42;
+    --cedar-light:#5d8267;
+    --brass:#c9a15a;
+    --rust:#8b3a3a;
+    --line:rgba(242,239,230,0.14);
+    --line-strong:rgba(242,239,230,0.28);
+    --shadow:0 20px 60px rgba(0,0,0,0.45);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Cairo', sans-serif;
+    line-height:1.85;
+    overflow-x:hidden;
+    font-size:16px;
+  }
+  ::selection{ background:var(--brass); color:var(--ink); }
 
+  h1,h2,h3,h4{
+    font-family:'Amiri', serif;
+    font-weight:700;
+    line-height:1.35;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    color:var(--brass);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--brass);
+    display:inline-block;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 24px;}
+  section{position:relative;}
+
+  /* ===== Stamp / seal signature element ===== */
+  .stamp{
+    position:relative;
+    width:96px; height:96px;
+    border:2px solid var(--rust);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:var(--rust);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.55rem;
+    letter-spacing:0.05em;
+    transform:rotate(-9deg);
+    opacity:0.9;
+    flex-shrink:0;
+    background:transparent;
+  }
+  .stamp::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid var(--rust);
+    border-radius:50%;
+    opacity:0.6;
+  }
+  .stamp b{
+    font-family:'Amiri', serif;
+    font-size:1.35rem;
+    letter-spacing:0.02em;
+    line-height:1;
+  }
+  .stamp span{ margin-top:2px; }
+
+  /* ===== Ticker ===== */
+  .ticker-bar{
+    background:var(--cedar);
+    color:var(--paper);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .ticker-track{
+    display:inline-flex;
+    gap:64px;
+    padding:9px 0;
+    animation:tickerMove 38s linear infinite;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.02em;
+  }
+  .ticker-track span{ opacity:0.92; }
+  .ticker-track span::before{ content:"■ "; color:var(--brass); }
+  @keyframes tickerMove{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(18,24,31,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:1140px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Amiri', serif;
+    font-weight:700;
+    font-size:1.25rem;
+    display:flex; align-items:center; gap:12px;
+  }
+  .logo .mark{
+    width:38px; height:38px;
+    border:1.5px solid var(--brass);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+    color:var(--brass);
+  }
+  nav ul{ display:flex; gap:32px; list-style:none; }
+  nav a{
+    font-size:0.92rem; font-weight:600;
+    color:var(--paper-dim);
+    transition:color .25s;
+    position:relative;
+  }
+  nav a:hover, nav a:focus-visible{ color:var(--brass); }
+  nav a:focus-visible{ outline:2px solid var(--brass); outline-offset:4px; }
+  .nav-cta{
+    display:none;
+  }
+  .menu-toggle{ display:none; }
+
+  @media (max-width: 860px){
+    nav ul{ display:none; }
+    .menu-toggle{
+      display:flex; background:none; border:1px solid var(--line-strong);
+      color:var(--paper); width:44px; height:44px; border-radius:8px;
+      align-items:center; justify-content:center; font-size:1.2rem;
+      cursor:pointer;
+    }
+  }
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 30px;
+    background:var(--brass);
+    color:var(--ink);
+    font-weight:700;
+    font-size:0.98rem;
+    border-radius:2px;
+    border:none;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    min-height:52px;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,161,90,0.35); }
+  .btn:focus-visible{ outline:3px solid var(--paper); outline-offset:3px; }
+  .btn-ghost{
+    background:transparent;
+    color:var(--paper);
+    border:1.5px solid var(--line-strong);
+  }
+  .btn-ghost:hover{ border-color:var(--brass); color:var(--brass); background:transparent; box-shadow:none; }
+  .btn-wide{ width:100%; justify-content:center; }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:110px 24px 90px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(59,92,66,0.35), transparent 55%),
+      radial-gradient(circle at 10% 90%, rgba(139,58,58,0.18), transparent 45%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    max-width:1140px; margin:0 auto;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    margin:20px 0 26px;
+    color:var(--paper);
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--brass);
+  }
+  .hero p.lead{
+    font-size:1.15rem;
+    color:var(--paper-dim);
+    max-width:52ch;
+    margin-bottom:36px;
+  }
+  .hero-actions{ display:flex; gap:18px; flex-wrap:wrap; align-items:center;}
+  .scroll-cue{
+    margin-top:56px;
+    display:flex; align-items:center; gap:14px;
+    color:var(--paper-dim);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+  }
+  .scroll-cue .arrow{
+    width:1px; height:38px; background:var(--line-strong);
+    position:relative;
+  }
+  .scroll-cue .arrow::after{
+    content:"";
+    position:absolute; bottom:0; right:-3px;
+    width:7px; height:7px;
+    border-bottom:1.5px solid var(--brass);
+    border-right:1.5px solid var(--brass);
+    transform:rotate(45deg);
+    animation:bounceDown 1.8s ease-in-out infinite;
+  }
+  @keyframes bounceDown{
+    0%,100%{ transform:translateY(0) rotate(45deg); }
+    50%{ transform:translateY(6px) rotate(45deg); }
+  }
+  .hero-card{
+    background:var(--ink-2);
+    border:1px solid var(--line-strong);
+    padding:30px;
+    position:relative;
+  }
+  .hero-card::before{
+    content:"ملف صحفي";
+    position:absolute; top:-13px; right:24px;
+    background:var(--cedar);
+    color:var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    padding:4px 12px;
+    letter-spacing:0.05em;
+  }
+  .hero-card .row{
+    display:flex; justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:0.92rem;
+  }
+  .hero-card .row:last-child{ border-bottom:none; }
+  .hero-card .row b{ color:var(--brass); font-family:'IBM Plex Mono', monospace; font-weight:500; }
+
+  /* ===== Section headers ===== */
+  .sec-head{
+    max-width:680px;
+    margin-bottom:56px;
+  }
+  .sec-head h2{
+    font-size:clamp(1.8rem, 3.2vw, 2.5rem);
+    margin-top:14px;
+    color:var(--paper);
+  }
+  .sec-head p{ color:var(--paper-dim); font-size:1.05rem; margin-top:16px; max-width:60ch; }
+
+  /* ===== Problem section ===== */
+  .problem{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .problem-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+  }
+  .problem-card{
+    background:var(--ink);
+    padding:36px 30px;
+  }
+  .problem-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem; color:var(--rust);
+    letter-spacing:0.08em;
+  }
+  .problem-card h3{
+    font-size:1.25rem; margin:14px 0 12px; font-family:'Cairo',sans-serif; font-weight:700;
+  }
+  .problem-card p{ color:var(--paper-dim); font-size:0.96rem; }
+
+  /* ===== Solution ===== */
+  .solution{ padding:100px 0; background:var(--ink-2); border-bottom:1px solid var(--line); }
+  .solution-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:center;
+  }
+  .solution-visual{
+    aspect-ratio:4/5;
+    background:var(--ink);
+    border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .solution-visual img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:top center;
+    filter:grayscale(20%) contrast(1.08) brightness(0.95);
+  }
+  .solution-visual .photo-overlay{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(18,24,31,0.05) 40%, rgba(18,24,31,0.85) 100%),
+      linear-gradient(135deg, rgba(59,92,66,0.35), rgba(139,58,58,0.12));
+    mix-blend-mode:multiply;
+  }
+  .solution-visual .frame-label{
+    position:absolute; bottom:20px; right:20px; z-index:2;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem; color:var(--paper);
+  }
+  .solution-text .eyebrow{ margin-bottom:14px; }
+  .solution-text h2{ font-size:clamp(1.9rem,3.4vw,2.6rem); margin-bottom:22px; }
+  .solution-text p{ color:var(--paper-dim); margin-bottom:18px; font-size:1.02rem; }
+  .pillars{ margin-top:30px; display:grid; gap:18px; }
+  .pillar{ display:flex; gap:16px; align-items:flex-start; }
+  .pillar .dot{
+    width:10px; height:10px; border-radius:50%; background:var(--brass);
+    margin-top:8px; flex-shrink:0;
+  }
+  .pillar b{ display:block; margin-bottom:4px; font-size:1rem; }
+  .pillar span{ color:var(--paper-dim); font-size:0.92rem; }
+
+  /* ===== Proof / stats ===== */
+  .proof{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .stats-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
+  }
+  .stat{
+    padding:34px 20px; text-align:center;
+    border-left:1px solid var(--line);
+  }
+  .stat:last-child{ border-left:none; }
+  .stat b{
+    font-family:'Amiri', serif;
+    font-size:2.4rem; color:var(--brass); display:block;
+  }
+  .stat span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; color:var(--paper-dim);
+    letter-spacing:0.04em;
+  }
+
+  /* ===== Portfolio ===== */
+  .portfolio{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .port-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:26px;
+  }
+  .port-card{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    padding:0;
+    display:flex; flex-direction:column;
+    transition:border-color .25s, transform .25s;
+  }
+  .port-card:hover{ border-color:var(--brass); transform:translateY(-4px); }
+  .port-thumb{
+    height:150px;
+    background:repeating-linear-gradient(45deg, rgba(59,92,66,0.35) 0 12px, rgba(18,24,31,0.9) 12px 24px);
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--paper-dim); font-size:0.75rem;
+  }
+  .port-body{ padding:24px; }
+  .port-body .cat{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    color:var(--cedar-light); letter-spacing:0.06em; margin-bottom:10px; display:block;
+  }
+  .port-body h3{ font-family:'Cairo',sans-serif; font-weight:700; font-size:1.12rem; margin-bottom:10px; }
+  .port-body p{ color:var(--paper-dim); font-size:0.9rem; }
+
+  /* ===== About / trust ===== */
+  .about{ padding:100px 0; background:var(--ink-2); border-bottom:1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; }
+  .about blockquote{
+    font-family:'Amiri', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    line-height:1.7;
+    color:var(--paper);
+    border-right:3px solid var(--brass);
+    padding-right:24px;
+    margin:30px 0;
+  }
+  .about p{ color:var(--paper-dim); margin-bottom:18px; font-size:1.02rem; }
+  .about-side{ display:flex; flex-direction:column; gap:22px; }
+  .value-row{
+    display:flex; gap:16px; align-items:flex-start;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .value-row:last-child{ border-bottom:none; }
+  .value-row .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--brass); font-size:0.9rem; flex-shrink:0; margin-top:2px;
+  }
+  .value-row b{ display:block; margin-bottom:4px; }
+  .value-row span{ color:var(--paper-dim); font-size:0.9rem; }
+
+  /* ===== Services ===== */
+  .services{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .service-card{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    padding:38px 30px;
+    display:flex; flex-direction:column;
+    position:relative;
+  }
+  .service-card.featured{
+    border-color:var(--brass);
+    box-shadow:var(--shadow);
+  }
+  .service-card.featured::before{
+    content:"الأكثر طلبًا";
+    position:absolute; top:-13px; left:24px;
+    background:var(--brass); color:var(--ink);
+    font-size:0.72rem; font-weight:700;
+    padding:4px 14px;
+  }
+  .service-card h3{ font-family:'Cairo',sans-serif; font-weight:800; font-size:1.2rem; margin-bottom:10px; }
+  .service-card .price{
+    font-family:'Amiri', serif; color:var(--brass); font-size:1.9rem; margin:14px 0 6px;
+  }
+  .service-card .price span{ font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--paper-dim); }
+  .service-card p.desc{ color:var(--paper-dim); font-size:0.92rem; margin-bottom:20px; }
+  .service-card ul{ list-style:none; margin-bottom:26px; display:grid; gap:10px; }
+  .service-card ul li{
+    font-size:0.9rem; color:var(--paper-dim);
+    padding-right:20px; position:relative;
+  }
+  .service-card ul li::before{
+    content:"—"; position:absolute; right:0; color:var(--cedar-light);
+  }
+  .service-card .btn{ margin-top:auto; }
+
+  /* ===== Testimonials ===== */
+  .testimonials{ padding:100px 0; background:var(--ink-2); border-bottom:1px solid var(--line); }
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .test-card{
+    background:var(--ink);
+    border:1px solid var(--line);
+    padding:30px;
+  }
+  .test-card .quote-mark{ font-family:'Amiri', serif; font-size:2.4rem; color:var(--brass); line-height:1; }
+  .test-card p{ color:var(--paper-dim); font-size:0.96rem; margin:14px 0 20px; }
+  .test-card .who{ display:flex; align-items:center; gap:12px; }
+  .test-card .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--cedar);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Amiri', serif; font-size:0.95rem; color:var(--paper);
+  }
+  .test-card .who b{ display:block; font-size:0.88rem; }
+  .test-card .who span{ font-size:0.78rem; color:var(--paper-dim); }
+  .test-note{
+    margin-top:20px; font-size:0.78rem; color:var(--paper-dim);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ===== FAQ ===== */
+  .faq{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .faq-list{ max-width:820px; }
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-item summary{
+    cursor:pointer;
+    padding:24px 4px;
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    display:flex; justify-content:space-between; align-items:center;
+    list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content:"+";
+    font-family:'Amiri', serif;
+    color:var(--brass);
+    font-size:1.4rem;
+    transition:transform .25s;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item .faq-a{
+    padding:0 4px 26px;
+    color:var(--paper-dim);
+    font-size:0.96rem;
+    max-width:70ch;
+  }
+  .faq-item summary:focus-visible{ outline:2px solid var(--brass); outline-offset:4px; }
+
+  /* ===== Final CTA / footer ===== */
+  .final-cta{
+    padding:110px 24px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(59,92,66,0.4), transparent 60%);
+    border-bottom:1px solid var(--line);
+  }
+  .final-cta .eyebrow{ justify-content:center; }
+  .final-cta .eyebrow::before{ display:none; }
+  .final-cta h2{
+    font-size:clamp(2rem,4vw,3rem);
+    max-width:16ch; margin:20px auto 22px;
+  }
+  .final-cta p{ color:var(--paper-dim); max-width:56ch; margin:0 auto 38px; font-size:1.05rem; }
+  .final-cta .btn{ font-size:1.05rem; padding:19px 42px; }
+  .final-cta .micro{ margin-top:18px; font-size:0.8rem; color:var(--paper-dim); font-family:'IBM Plex Mono', monospace; }
+
+  footer{ padding:60px 24px 32px; }
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;
+    padding-bottom:40px; border-bottom:1px solid var(--line);
+  }
+  .footer-grid h4{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem;
+    color:var(--brass); letter-spacing:0.08em; margin-bottom:18px; font-weight:500;
+  }
+  .footer-grid ul{ list-style:none; display:grid; gap:10px; }
+  .footer-grid a{ color:var(--paper-dim); font-size:0.9rem; transition:color .2s; }
+  .footer-grid a:hover{ color:var(--paper); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:26px; flex-wrap:wrap; gap:14px;
+    font-size:0.8rem; color:var(--paper-dim);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px){
+    .hero-inner, .solution-grid, .about-grid{ grid-template-columns:1fr; }
+    .problem-grid, .port-grid, .service-grid, .test-grid{ grid-template-columns:1fr; }
+    .problem-card{ border-bottom:1px solid var(--line-strong); }
+    .stats-row{ grid-template-columns:repeat(2,1fr); }
+    .stat{ border-left:none; border-bottom:1px solid var(--line); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .hero{ padding:80px 20px 60px; }
+    .btn{ width:100%; }
+    .hero-actions{ width:100%; }
+    .hero-actions .btn{ width:100%; }
+  }
+  @media (max-width: 560px){
+    .footer-grid{ grid-template-columns:1fr; }
+    section{ padding-left:0; }
+    .wrap{ padding:0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker-bar" aria-hidden="false">
+  <div class="ticker-track">
+    <span>السيادة وقرار الحرب والسلم في لبنان: من يملك القرار فعلاً؟</span>
+    <span>الخوارزميات الجديدة وسلطة المراقبة: هل يقايض الناس حريتهم بالأمان؟</span>
+    <span>قراءة في العقد الاجتماعي بين هوبز وفروم: لماذا نقبل القيود في زمن الخوف؟</span>
+    <span>تحليل معمّق لتوازن الردع الإقليمي بعد سقوط بنت جبيل رمزيًا</span>
+    <span>"الكيانية اللبنانية" (2024): إصدار جديد في الفلسفة السياسية للهوية اللبنانية</span>
+    <span>عمود "قضايا" في جريدة النهار: قراءات أسبوعية في الشأن اللبناني والإقليمي</span>
+    <span>دكتوراه في اللغة العربية وآدابها من الجامعة اللبنانية — أطروحة في شعر جوزف حرب</span>
+    <span>السيادة وقرار الحرب والسلم في لبنان: من يملك القرار فعلاً؟</span>
+    <span>الخوارزميات الجديدة وسلطة المراقبة: هل يقايض الناس حريتهم بالأمان؟</span>
+    <span>قراءة في العقد الاجتماعي بين هوبز وفروم: لماذا نقبل القيود في زمن الخوف؟</span>
+    <span>تحليل معمّق لتوازن الردع الإقليمي بعد سقوط بنت جبيل رمزيًا</span>
+  </div>
+</div>
+
+<header>
+  <div class="nav-row">
+    <div class="logo">
+      <span class="mark">م ش</span>
+      د. ميشال الشّمّاعي
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">عني</a></li>
+        <li><a href="#portfolio">الأعمال</a></li>
+        <li><a href="#services">الخدمات</a></li>
+        <li><a href="#testimonials">أصداء نقدية</a></li>
+        <li><a href="#faq">أسئلة</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn nav-cta">تواصل الآن</a>
+    <button class="menu-toggle" aria-label="فتح القائمة">☰</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">صحافة سياسية · تحليل استراتيجي · لبنان والمنطقة</p>
+      <h1>الحقيقة السياسية لا تُختصر في عنوان<br><em>لكنها تبدأ من هنا</em></h1>
+      <p class="lead">كتابات ومقابلات وأبحاث في السياسة اللبنانية والإقليمية، مبنية على قراءة فلسفية عميقة للسلطة والحرية، لا على الضجيج اليومي. تحليل يُقرأ اليوم، ويُستشهد به غدًا.</p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn">اطّلع على الأعمال والمقابلات</a>
+        <a href="#services" class="btn btn-ghost">اطلب تحليلًا أو مقابلة</a>
+      </div>
+      <div class="scroll-cue">
+        <div class="arrow"></div>
+        <span>تابع القراءة: الملف الكامل في الأسفل</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="row"><span>المؤهل</span><b>دكتوراه في اللغة العربية وآدابها</b></div>
+      <div class="row"><span>التغطية</span><b>لبنان · المشرق · العلاقات الدولية</b></div>
+      <div class="row"><span>المنهج</span><b>صحافة سياسية + فلسفة وفكر</b></div>
+      <div class="row"><span>الحالة</span><b style="color:var(--cedar-light)">متاح لتعاون جديد</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">المشكلة</p>
+      <h2>معظم التحليل السياسي اليوم يشرح الحدث، ولا يفسّر جذره</h2>
+      <p>في زمن تتدفّق فيه الأخبار كل دقيقة، يغرق القارئ المهتم بالسياسة والثقافة في تعليقات سريعة لا تصمد بعد أربع وعشرين ساعة، بينما يبحث فعليًا عن فهم أعمق لما يجري ولماذا.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="tag">01 — الضجيج</span>
+        <h3>تحليل يواكب العنوان، لا الجذر</h3>
+        <p>تعليقات آنية تُستهلك وتُنسى، بلا إطار فكري يربط الحدث بما سبقه وما سيليه.</p>
+      </div>
+      <div class="problem-card">
+        <span class="tag">02 — السطحية</span>
+        <h3>غياب العمق الفلسفي والتاريخي</h3>
+        <p>قلّة من الكتّاب يربطون الأزمة اللبنانية الراهنة بأسئلة السيادة والعقد الاجتماعي والسلطة كما طرحها هوبز أو فروم.</p>
+      </div>
+      <div class="problem-card">
+        <span class="tag">03 — التشتت</span>
+        <h3>لا مصدر واحد موثوق يجمع كل ذلك</h3>
+        <p>الكتابات والمقابلات والأبحاث الجادة مبعثرة بين منصات، بلا أرشيف واحد يسهل الرجوع إليه والاستشهاد به.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="solution">
+  <div class="wrap solution-grid">
+    <div class="solution-visual">
+      <img src="michel-chammai.jpg" alt="د. ميشال الشّمّاعي">
+      <div class="photo-overlay"></div>
+      <span class="frame-label">د. ميشال الشّمّاعي — منذ بداية المسيرة الصحفية عام 2000</span>
+    </div>
+    <div class="solution-text">
+      <p class="eyebrow">الحل</p>
+      <h2>باحث أكاديمي وكاتب سياسي يقرأ الحدث اللبناني من داخل التاريخ والفلسفة</h2>
+      <p>د. ميشال الشّمّاعي باحث أكاديمي وكاتب وصحافي ومحلّل سياسي لبناني، حائز على دكتوراه في اللغة العربية وآدابها من الجامعة اللبنانية، إلى جانب دبلوم دراسات معمّقة من جامعة الروح القدس - الكسليك حول فكر الدكتور شارل مالك، ودبلوم في العلاقات الدبلوماسية من جامعة القاهرة. يجمع بين خلفية أكاديمية وتربوية تمتد لأكثر من خمسة وعشرين عامًا وبين ممارسة صحافية سياسية مستمرة منذ العام 2000، ليقدّم تحليلًا لا يكتفي بوصف الحدث، بل يضعه في سياقه الفكري والتاريخي الأعمق.</p>
+      <p>هذا الموقع هو الأرشيف الكامل لهذا العمل: الكتب، المقالات، المقابلات، والأبحاث، في مكان واحد موثّق ومصنّف.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="dot"></span>
+          <div><b>كتابة صحافية وتحليل سياسي</b><span>مقالات وأعمدة رأي في جريدة النهار، نداء الوطن، جسور عربي، وغيرها منذ أكثر من عشرين عامًا.</span></div>
+        </div>
+        <div class="pillar">
+          <span class="dot"></span>
+          <div><b>باحث أكاديمي متخصص</b><span>أستاذ مساعد في الجامعة اللبنانية، ومحاضر سابق في جامعة الحكمة في الفكر السياسي اللبناني.</span></div>
+        </div>
+        <div class="pillar">
+          <span class="dot"></span>
+          <div><b>عمق أدبي وفلسفي</b><span>ست مؤلفات منشورة بين الشعر والرواية والفلسفة السياسية، تُغني زاوية النظر إلى الشأن العام.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROOF / STATS ===== -->
+<section class="proof">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat"><b>+25</b><span>سنة خبرة تربوية وصحفية</span></div>
+      <div class="stat"><b>+100</b><span>مقالة وتحليل منشور</span></div>
+      <div class="stat"><b>+10</b><span>صحف ومواقع تعاون معها</span></div>
+      <div class="stat"><b>6</b><span>مؤلفات منشورة</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">الأعمال</p>
+      <h2>ملف الأعمال: كتابات، مقابلات، ومؤلفات</h2>
+      <p>عيّنة من الأرشيف الكامل، مصنّفة بحسب طبيعة العمل، مع إتاحة الرجوع إلى كل قطعة والاستشهاد بها.</p>
+    </div>
+    <div class="port-grid">
+      <a class="port-card" href="https://www.lebaneseforces.com/2025/04/25/%d8%a7%d9%84%d9%83%d9%8a%d8%a7%d9%86%d8%a8%d8%a9-%d8%a7%d9%84%d9%84%d8%a8%d9%86%d8%a7%d9%86%d9%8a%d8%a9/" target="_blank" rel="noopener">
+        <div class="port-thumb">كتاب — 2024</div>
+        <div class="port-body">
+          <span class="cat">فلسفة سياسية</span>
+          <h3>الكيانية اللبنانية</h3>
+          <p>دراسة في الهوية والكيان اللبناني، صادرة عن مؤسسة ألفياء للنشر والتوزيع، ونالت قراءة نقدية بقلم الأستاذ يوسف طراد في مجلة المسيرة.</p>
+        </div>
+      </a>
+      <a class="port-card" href="http://www.monliban.org/monliban/ui/topic.php?id=5981" target="_blank" rel="noopener">
+        <div class="port-thumb">رواية — 2021</div>
+        <div class="port-body">
+          <span class="cat">أدب روائي</span>
+          <h3>كفرشليم</h3>
+          <p>رواية صادرة عن دار سائر المشرق، تناولها بالنقد الكاتب يوسف طراد على موقع monliban، والأديبة ميشلين مبارك في جريدة اللواء.</p>
+        </div>
+      </a>
+      <a class="port-card" href="https://www.annahar.com/arabic/culture/%D9%83%D8%AA%D8%A8160%D9%88%D9%83%D8%AA%D8%A7%D8%A8/14012021082912032" target="_blank" rel="noopener">
+        <div class="port-thumb">كتاب — 2018</div>
+        <div class="port-body">
+          <span class="cat">فلسفة سياسية</span>
+          <h3>القضية اللبنانية في فكر الدكتور شارل مالك</h3>
+          <p>دراسة موسّعة صدرت عام 2018، حظيت بقراءة نقدية للأستاذ يوسف طراد نُشرت في جريدة النهار.</p>
+        </div>
+      </a>
+      <a class="port-card" href="https://www.annahar.com/arabic/searchresults?keyword=%D9%85%D9%8A%D8%B4%D8%A7%D9%84%20%D8%A7%D9%84%D8%B4%D9%85%D9%91%D8%A7%D8%B9%D9%8A" target="_blank" rel="noopener">
+        <div class="port-thumb">عمود — منذ 2022</div>
+        <div class="port-body">
+          <span class="cat">صحافة سياسية</span>
+          <h3>عمود "قضايا" — جريدة النهار</h3>
+          <p>كتابات وتحليلات سياسية دورية في صفحة "قضايا" بجريدة النهار اللبنانية، إلى جانب مقابلات صحفية أجريت معه.</p>
+        </div>
+      </a>
+      <a class="port-card" href="https://www.jusur.com/arabic/authors/%D8%AF-%D9%85%D9%8A%D8%B4%D8%A7%D9%84-%D8%A7%D9%84%D8%B4%D9%85%D8%A7%D8%B9%D9%8A" target="_blank" rel="noopener">
+        <div class="port-thumb">2022 – 2024</div>
+        <div class="port-body">
+          <span class="cat">شؤون إقليمية</span>
+          <h3>موقع جسور عربي — الشأن العراقي</h3>
+          <p>باحث وكاتب متخصص في الشأن العراقي والشؤون الإقليمية والدولية على منصة جسور عربي.</p>
+        </div>
+      </a>
+      <div class="port-card">
+        <div class="port-thumb">2026 – حتى اليوم</div>
+        <div class="port-body">
+          <span class="cat">إدارة تحرير</span>
+          <h3>مدير تحرير — موقع بوابة بيروت</h3>
+          <p>الإشراف التحريري على محتوى الموقع، إلى جانب مسيرة كتابة ممتدة منذ عام 2000 في القوات اللبنانية، نداء الوطن، السياسة الكويتية، ومنصات أخرى.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / TRUST ===== -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">عني</p>
+      <h2 style="font-size:clamp(1.9rem,3.4vw,2.6rem); margin:14px 0 8px;">مسيرة تجمع بين قاعة الدرس وغرفة التحرير</h2>
+      <blockquote>"لا أكتب عن الحدث لأصفه، بل لأفهم لماذا يقبل الناس أن يُحكموا بهذه الطريقة، في هذا الزمن بالذات."</blockquote>
+      <p>د. ميشال الشّمّاعي باحث أكاديمي وكاتب وصحافي لبناني، حائز على دكتوراه في اللغة العربية وآدابها من الجامعة اللبنانية (أطروحة حول عالم الريف في شعر جوزف حرب)، ودبلوم دراسات معمّقة من جامعة الروح القدس - الكسليك حول فكر الدكتور شارل مالك، إلى جانب دبلوم في العلاقات الدبلوماسية والمنازعات الدولية من جامعة القاهرة.</p>
+      <p>يجمع في مسيرته المهنية بين التدريس الجامعي في الجامعة اللبنانية وجامعة الحكمة، والعمل التربوي في وزارة التربية والتعليم العالي والمركز التربوي للبحوث والإنماء، وبين الكتابة السياسية المستمرة منذ العام 2000 في صحف ومواقع لبنانية وعربية عدة، أبرزها جريدة النهار ونداء الوطن وجسور عربي، وصولًا إلى إدارة تحرير موقع بوابة بيروت.</p>
+    </div>
+    <div class="about-side">
+      <div class="value-row">
+        <span class="num">01</span>
+        <div><b>خلفية أكاديمية موثّقة</b><span>دكتوراه في اللغة العربية وآدابها، ودبلومات متخصصة في الدراسات اللغوية والدبلوماسية.</span></div>
+      </div>
+      <div class="value-row">
+        <span class="num">02</span>
+        <div><b>خبرة تربوية ممتدة</b><span>أستاذ مساعد في الجامعة اللبنانية منذ 2016، ومسؤول تربوي في وزارة التربية والتعليم العالي.</span></div>
+      </div>
+      <div class="value-row">
+        <span class="num">03</span>
+        <div><b>حضور صحفي مستمر</b><span>كتابة سياسية وتحليلية منذ أكثر من عشرين عامًا في أكثر من عشر منصات إعلامية.</span></div>
+      </div>
+      <div class="value-row">
+        <span class="num">04</span>
+        <div><b>إنتاج أدبي وفكري</b><span>ست مؤلفات منشورة بين الشعر والرواية والفلسفة السياسية.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">الخدمات</p>
+      <h2>تعاون مباشر: بحث، كتابة سياسية، وإطلالات إعلامية</h2>
+      <p>ثلاث طرق واضحة للتعاون، يُحدَّد نطاق العمل والتسعير لكل منها بحسب طبيعة الطلب بعد التواصل المباشر.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>بحث وتحليل سياسي مكتوب</h3>
+        <div class="price">حسب العرض والطلب</div>
+        <p class="desc">تقرير تحليلي مكتوب حول قضية سياسية أو ملف إقليمي محدد، معدّ للنشر أو للاستخدام الداخلي.</p>
+        <ul>
+          <li>تحليل معمّق مبني على مصادر موثّقة</li>
+          <li>خلفية تاريخية وفكرية للقضية المطروحة</li>
+          <li>مهلة تسليم تُحدَّد بحسب حجم الطلب</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost btn-wide">اطلب تقريرًا</a>
+      </div>
+      <div class="service-card featured">
+        <h3>كتابة سياسية ومقالات رأي</h3>
+        <div class="price">حسب العرض والطلب</div>
+        <p class="desc">مقالة رأي أو افتتاحية جاهزة للنشر في الصحف أو المنصات الرقمية، بأسلوب صحفي احترافي.</p>
+        <ul>
+          <li>مقالة رأي كاملة جاهزة للنشر</li>
+          <li>مراجعة وتعديل واحدة ضمن نطاق الاتفاق</li>
+          <li>مهلة تسليم تُحدَّد بحسب حجم الطلب</li>
+        </ul>
+        <a href="#contact" class="btn btn-wide">اطلب مقالة الآن</a>
+      </div>
+      <div class="service-card">
+        <h3>إطلالات ومداخلات إعلامية</h3>
+        <div class="price">حسب العرض والطلب</div>
+        <p class="desc">مداخلة أو مقابلة تلفزيونية وإذاعية حول قضية سياسية راهنة، بتحليل مباشر وواضح.</p>
+        <ul>
+          <li>تنسيق مباشر مع فريق البرنامج</li>
+          <li>موجز نقاط قبل البث عند الطلب</li>
+          <li>تغطية باللغتين العربية والإنكليزية</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost btn-wide">حجز موعد إطلالة</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">أصداء نقدية</p>
+      <h2>قراءات نقدية حول الأعمال المنشورة</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>تناول الكاتب يوسف طراد رواية "كفرشليم" بقراءة نقدية منشورة على موقع monliban، أضاءت على بنائها الروائي وأبعادها الإنسانية.</p>
+        <div class="who">
+          <div class="avatar">ي</div>
+          <div><b>يوسف طراد</b><span>موقع monliban</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>الأديبة ميشلين مبارك كتبت رؤيتها لرواية "كفرشليم" في جريدة اللواء اللبنانية، متوقفة عند رمزية العنوان وعمق الشخصيات.</p>
+        <div class="who">
+          <div class="avatar">م</div>
+          <div><b>ميشلين مبارك</b><span>جريدة اللواء</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p>كتاب "القضية اللبنانية في فكر الدكتور شارل مالك" نال قراءة نقدية للأستاذ يوسف طراد نُشرت في جريدة النهار، تناولت راهنية الطرح الفكري للكتاب.</p>
+        <div class="who">
+          <div class="avatar">ي</div>
+          <div><b>يوسف طراد</b><span>جريدة النهار</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="test-note">جميع القراءات النقدية أعلاه منشورة وموثّقة، مع روابطها في الأرشيف أعلاه.</p>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">أسئلة شائعة</p>
+      <h2>قبل أن تتواصل</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>كم يستغرق تسليم تقرير أو مقالة؟</summary>
+        <p class="faq-a">تختلف المهلة بحسب حجم العمل وطبيعته، وتُحدَّد بدقة عند الاتفاق على تفاصيل الطلب، مع الحرص دائمًا على التوثيق والدقة قبل السرعة.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل يمكن طلب تحليل حول موضوع لا يتعلق بلبنان تحديدًا؟</summary>
+        <p class="faq-a">نعم، التغطية تشمل الشأن اللبناني كمحور رئيسي، إضافة إلى ملفات المشرق والعلاقات الدولية المرتبطة بالمنطقة.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل الإطلالات الإعلامية متاحة بالإنكليزية أيضًا؟</summary>
+        <p class="faq-a">نعم، المداخلات والمقابلات متاحة باللغتين العربية والإنكليزية بحسب طبيعة البرنامج والجمهور المستهدف.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل هناك التزام بخط سياسي أو حزبي معيّن؟</summary>
+        <p class="faq-a">لا. التحليل مبني على منهج فكري مستقل يعتمد على المصادر والسياق التاريخي والفلسفي، بمعزل عن أي انتماء حزبي أو طائفي.</p>
+      </details>
+      <details class="faq-item">
+        <summary>كيف يُحدَّد سعر العمل؟</summary>
+        <p class="faq-a">لا يوجد تسعير ثابت معلن؛ يُحدَّد السعر بحسب نطاق العمل وحجمه وطبيعته، بعد التواصل المباشر والاتفاق على تفاصيل الطلب.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta" id="contact">
+  <div class="stamp" style="margin:0 auto 26px;"><b>م ش</b><span>موثّق</span></div>
+  <p class="eyebrow">لا تؤجّل الفهم إلى الغد</p>
+  <h2>تواصل الآن، ودَع التحليل يبدأ اليوم</h2>
+  <p>سواء كنت صحفيًا يبحث عن مقالة جاهزة، مؤسسة تحتاج تحليلًا استراتيجيًا، أو منتجًا يريد ضيفًا يفهم عمق القضية لا سطحها، هذه هي الخطوة الطبيعية التالية.</p>
+  <a href="mailto:Dr.michel.chammai@hotmail.com" class="btn">راسلني الآن لبدء التعاون</a>
+  <p class="micro">لا التزام قبل الاتفاق على تفاصيل الطلب والتسعير</p>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">
+          <span class="mark">م ش</span>
+          د. ميشال الشّمّاعي
+        </div>
+        <p style="color:var(--paper-dim); font-size:0.9rem; max-width:34ch;">باحث أكاديمي وكاتب وصحافي لبناني، صحافة سياسية وتحليل استراتيجي بعمق فلسفي وأدبي.</p>
+      </div>
+      <div>
+        <h4>الموقع</h4>
+        <ul>
+          <li><a href="#about">عني</a></li>
+          <li><a href="#portfolio">الأعمال</a></li>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#faq">أسئلة شائعة</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>الخدمات</h4>
+        <ul>
+          <li><a href="#services">تقارير تحليلية</a></li>
+          <li><a href="#services">مقالات رأي</a></li>
+          <li><a href="#services">إطلالات إعلامية</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>تواصل</h4>
+        <ul>
+          <li><a href="mailto:Dr.michel.chammai@hotmail.com">راسلني عبر البريد</a></li>
+          <li><a href="https://www.facebook.com/Dr.Michel.Chammai.official.page" target="_blank" rel="noopener">فيسبوك</a></li>
+          <li><a href="https://x.com/drmichelchammai" target="_blank" rel="noopener">حساب X</a></li>
+          <li><a href="https://youtube.com/playlist?list=PL0KPTxIUKAETeXsGxf0fI4iGxlSdanJt" target="_blank" rel="noopener">قناة يوتيوب</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 د. ميشال الشّمّاعي. جميع الحقوق محفوظة.</span>
+      <span>DrMichelChammai</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

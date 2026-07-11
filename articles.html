@@ -1,1 +1,103 @@
-<h1>قيد الإنشاء</h1>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المقالات - الدكتور ميشال الشمّاعي</title>
+<style>
+body{
+font-family:Tahoma,Arial,sans-serif;
+background:#f5f5f5;
+margin:40px;
+}
+
+h1{
+text-align:center;
+color:#222;
+}
+
+.article{
+background:white;
+padding:20px;
+margin:20px auto;
+max-width:900px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.article a{
+text-decoration:none;
+font-size:22px;
+color:#0b63ce;
+}
+
+.date{
+color:#777;
+margin-top:8px;
+}
+
+.category{
+display:inline-block;
+background:#eef3fb;
+color:#0b63ce;
+font-size:13px;
+padding:3px 10px;
+border-radius:20px;
+margin-top:8px;
+margin-left:8px;
+}
+
+.empty{
+text-align:center;
+color:#999;
+margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>مقالات الدكتور ميشال الشمّاعي</h1>
+
+<div id="articles-list">
+  <div class="empty">جارٍ تحميل المقالات...</div>
+</div>
+
+<script>
+const MONTHS_AR = ["كانون الثاني","شباط","آذار","نيسان","أيار","حزيران","تموز","آب","أيلول","تشرين الأول","تشرين الثاني","كانون الأول"];
+
+function formatArabicDate(dateStr) {
+  const d = new Date(dateStr);
+  if (isNaN(d)) return dateStr;
+  return `${d.getDate()} ${MONTHS_AR[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+fetch('content/articles.json?t=' + Date.now())
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById('articles-list');
+    const articles = (data.articles || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (articles.length === 0) {
+      list.innerHTML = '<div class="empty">لا توجد مقالات منشورة بعد.</div>';
+      return;
+    }
+
+    list.innerHTML = articles.map(article => `
+      <div class="article">
+        <a href="article.html?slug=${encodeURIComponent(article.slug)}">
+          ${article.title}
+        </a>
+        <div class="date">${formatArabicDate(article.date)}</div>
+        ${article.category ? `<span class="category">${article.category}</span>` : ''}
+      </div>
+    `).join('');
+  })
+  .catch(err => {
+    document.getElementById('articles-list').innerHTML =
+      '<div class="empty">تعذّر تحميل المقالات حاليًا. حاول لاحقًا.</div>';
+    console.error(err);
+  });
+</script>
+
+</body>
+</html>
